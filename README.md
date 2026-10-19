@@ -1,6 +1,6 @@
 # EzEyes
 
-EzEyes is a small macOS menu bar app for Night Shift. Click its moon icon to toggle Night Shift, adjust warmth, or change the global shortcut. The default shortcut is **Control-N (⌃N)**.
+EzEyes is a small macOS menu bar app for Night Shift. Click its eye icon to toggle Night Shift, adjust warmth, or change the global shortcut. The default shortcut is **Control-N (⌃N)**.
 
 ## What is in the download
 
@@ -20,7 +20,7 @@ zsh scripts/build-app.sh
 open dist/EzEyes.app
 ```
 
-That runs EzEyes directly from the build folder. Nothing needs to be copied into Applications. It has no Dock icon; look for the moon in the menu bar. Click the shortcut button to record a new combination, or press Esc to cancel. The shortcut must include Control, Option, or Command. Choose **Quit EzEyes** from its panel when finished.
+That runs EzEyes directly from the build folder. Nothing needs to be copied into Applications. It has no Dock icon; look for the eye in the menu bar (outline when Night Shift is off, filled when on). Click the shortcut button to record a new combination, or press Esc to cancel. The shortcut must include Control, Option, or Command. Choose **Quit EzEyes** from its panel when finished.
 
 If you want a permanent copy for your account, quit the running copy first and run these commands from the repository folder:
 

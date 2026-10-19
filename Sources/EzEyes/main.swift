@@ -78,7 +78,7 @@ final class EzEyesAppDelegate: NSObject, NSApplicationDelegate {
         }
 
         if CommandLine.arguments.contains("--inspect-popover") {
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 self?.togglePopover()
                 NSLog("EzEyes popover shown: %@", self?.popover.isShown == true ? "yes" : "no")
             }
@@ -101,7 +101,7 @@ final class EzEyesAppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func updateStatusIcon(available: Bool, enabled: Bool) {
-        let symbol = enabled ? "moon.stars.fill" : "moon"
+        let symbol = enabled ? "eye.fill" : "eye"
         let image = NSImage(systemSymbolName: symbol, accessibilityDescription: "Night Shift")
         image?.isTemplate = true
         statusItem.button?.image = image

@@ -7,9 +7,10 @@ struct MenuView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack(spacing: 10) {
-                Image(systemName: "moon.stars.fill")
+                Image(systemName: "eye.fill")
                     .font(.system(size: 20))
                     .foregroundStyle(.orange)
+                    .accessibilityHidden(true)
                 Text("EzEyes")
                     .font(.headline)
                 Spacer()
