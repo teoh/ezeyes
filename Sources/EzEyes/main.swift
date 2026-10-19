@@ -19,7 +19,7 @@ if CommandLine.arguments.contains("--diagnose") {
     let app = NSApplication.shared
     let delegate = EzEyesAppDelegate()
     app.delegate = delegate
-    app.setActivationPolicy(.accessory)
+    app.setActivationPolicy(CommandLine.arguments.contains("--preview") ? .regular : .accessory)
     withExtendedLifetime(delegate) {
         app.run()
     }

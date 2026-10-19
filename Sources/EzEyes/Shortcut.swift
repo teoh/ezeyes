@@ -146,13 +146,21 @@ struct ShortcutRecorder: NSViewRepresentable {
         let button = RecorderButton(title: shortcut.displayName, target: nil, action: nil)
         button.bezelStyle = .rounded
         button.controlSize = .regular
+        button.target = button
+        button.action = #selector(RecorderButton.startRecording(_:))
         button.show(shortcut.displayName)
+        button.toolTip = shortcut == .initial
+            ? "Control-N also moves down one line in macOS text fields. Click to change it."
+            : "Click to record a new shortcut."
         button.onRecord = onRecord
         return button
     }
 
     func updateNSView(_ button: RecorderButton, context: Context) {
         button.onRecord = onRecord
+        button.toolTip = shortcut == .initial
+            ? "Control-N also moves down one line in macOS text fields. Click to change it."
+            : "Click to record a new shortcut."
         if !button.isRecording {
             button.show(shortcut.displayName)
         }
@@ -167,16 +175,12 @@ final class RecorderButton: NSButton {
 
     override var acceptsFirstResponder: Bool { true }
 
-    override func mouseDown(with event: NSEvent) {
-        super.mouseDown(with: event)
-        beginRecording()
-    }
-
-    private func beginRecording() {
+    @objc func startRecording(_ sender: Any?) {
+        guard !isRecording else { return }
         previousTitle = displayText
+        guard window?.makeFirstResponder(self) == true else { return }
         isRecording = true
         show("Press shortcut…")
-        window?.makeFirstResponder(self)
     }
 
     override func keyDown(with event: NSEvent) {
