@@ -29,7 +29,7 @@ dist/EzEyes.app/Contents/MacOS/EzEyes --verify-controls
 
 `--verify-controls` briefly toggles Night Shift and changes warmth, then restores the original settings. On macOS 26.6.2, the toggle, warmth change, and restoration passed. The hotkey registration and handler dispatch check passed.
 
-The visible preview also passed UI checks: the switch changed the actual Night Shift state, the slider changed the system warmth from 50% to 71%, and both settings were restored. The shortcut recorder accepted ⌃⌥M, retained it after relaunch, accepted Esc to cancel, could start from the keyboard with Space, and was restored to ⌃N. The available UI automation sends keys to a selected app and did not trigger the global hotkey; a physical Control-N press is the remaining manual check.
+UI checks in both the preview window and the actual menu bar popover passed: the switch changed the system Night Shift state, and the slider moved warmth from 50% to 71%. Both settings were restored. The shortcut recorder accepted ⌃⌥M, retained it after relaunch, accepted Esc to cancel, could start from the keyboard with Space, and was restored to ⌃N. A physical Control-N press also toggled Night Shift, as confirmed by the user.
 
 ## How it works
 

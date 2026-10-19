@@ -19,7 +19,9 @@ if CommandLine.arguments.contains("--diagnose") {
     let app = NSApplication.shared
     let delegate = EzEyesAppDelegate()
     app.delegate = delegate
-    app.setActivationPolicy(CommandLine.arguments.contains("--preview") ? .regular : .accessory)
+    let inspectionMode = CommandLine.arguments.contains("--preview")
+        || CommandLine.arguments.contains("--inspect-popover")
+    app.setActivationPolicy(inspectionMode ? .regular : .accessory)
     withExtendedLifetime(delegate) {
         app.run()
     }
@@ -42,7 +44,8 @@ final class EzEyesAppDelegate: NSObject, NSApplicationDelegate {
             button.toolTip = "EzEyes Night Shift"
         }
 
-        popover.behavior = .transient
+        popover.behavior = CommandLine.arguments.contains("--inspect-popover")
+            ? .applicationDefined : .transient
         popover.contentViewController = NSHostingController(rootView: MenuView(model: model))
         model.onStatusChange = { [weak self] available, enabled in
             self?.updateStatusIcon(available: available, enabled: enabled)
@@ -52,7 +55,8 @@ final class EzEyesAppDelegate: NSObject, NSApplicationDelegate {
             self?.model.refresh()
         }
 
-        if CommandLine.arguments.contains("--preview") {
+        if CommandLine.arguments.contains("--preview")
+            || CommandLine.arguments.contains("--inspect-popover") {
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 360, height: 430),
                                   styleMask: [.titled, .closable],
                                   backing: .buffered,
@@ -70,6 +74,13 @@ final class EzEyesAppDelegate: NSObject, NSApplicationDelegate {
                 let output = Bundle.main.bundleURL.deletingLastPathComponent()
                     .appendingPathComponent("EzEyes-preview.png")
                 try? bitmap.representation(using: .png, properties: [:])?.write(to: output)
+            }
+        }
+
+        if CommandLine.arguments.contains("--inspect-popover") {
+            DispatchQueue.main.async { [weak self] in
+                self?.togglePopover()
+                NSLog("EzEyes popover shown: %@", self?.popover.isShown == true ? "yes" : "no")
             }
         }
     }
