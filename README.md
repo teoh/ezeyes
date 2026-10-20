@@ -12,7 +12,14 @@ An `.app` is the standard macOS folder bundle that makes EzEyes appear in the me
 
 You need macOS 13 or later and a Swift 5.9 or later toolchain from Xcode or Apple's [Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). If `swift --version` does not work, run `xcode-select --install` and complete Apple's installer. If Swift is older than 5.9, update the tools through Software Update. EzEyes has been tested on macOS 26.6.2; earlier supported versions have not been tested here.
 
-Once this repository is published on GitHub, choose **Code → Download ZIP** and extract it. In Terminal, type `cd `, drag the extracted folder from Finder into Terminal, and press Return. You can also copy the repository's clone URL from the **Code** menu, clone it with Git, and enter the cloned folder. Then run:
+Get the source from [GitHub](https://github.com/teoh/ezeyes): choose **Code → Download ZIP** and extract it. In Terminal, type `cd `, drag the extracted folder from Finder into Terminal, and press Return. Or clone it with Git:
+
+```sh
+git clone https://github.com/teoh/ezeyes.git
+cd ezeyes
+```
+
+From the source folder, run:
 
 ```sh
 swift --version
