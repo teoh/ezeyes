@@ -35,8 +35,10 @@ Choose **Quit EzEyes** in its panel. Remove the installed copy and saved shortcu
 
 ```sh
 rm -rf "$HOME/Applications/EzEyes.app"
-defaults delete com.mat.ezeyes 2>/dev/null || true
+defaults delete io.github.teoh.ezeyes 2>/dev/null || true
 ```
+
+`io.github.teoh.ezeyes` names the app for everyone; this clears only your account's settings. For older builds, also run `defaults delete com.mat.ezeyes 2>/dev/null || true`.
 
 Then delete the source folder, including its `dist/` and `.build/` folders. If you installed EzEyes elsewhere, delete that copy too. EzEyes installs no login item or helper.
 

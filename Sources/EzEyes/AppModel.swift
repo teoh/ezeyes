@@ -18,9 +18,21 @@ final class AppModel: ObservableObject {
     private let shortcutKey = "toggleShortcut.v1"
 
     init() {
-        if let data = UserDefaults.standard.data(forKey: shortcutKey),
+        let storedData = UserDefaults.standard.data(forKey: shortcutKey)
+        let legacyData: Data?
+        if storedData == nil {
+            // Carry forward shortcuts saved by builds with the original bundle ID.
+            legacyData = UserDefaults.standard.persistentDomain(forName: "com.mat.ezeyes")?[shortcutKey] as? Data
+        } else {
+            legacyData = nil
+        }
+
+        if let data = storedData ?? legacyData,
            let saved = try? JSONDecoder().decode(Shortcut.self, from: data) {
             shortcut = saved
+            if storedData == nil {
+                UserDefaults.standard.set(data, forKey: shortcutKey)
+            }
         } else {
             shortcut = .initial
         }

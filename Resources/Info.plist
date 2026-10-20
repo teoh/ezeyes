@@ -4,7 +4,7 @@
 <dict>
     <key>CFBundleDevelopmentRegion</key><string>en</string>
     <key>CFBundleExecutable</key><string>EzEyes</string>
-    <key>CFBundleIdentifier</key><string>com.mat.ezeyes</string>
+    <key>CFBundleIdentifier</key><string>io.github.teoh.ezeyes</string>
     <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
     <key>CFBundleName</key><string>EzEyes</string>
     <key>CFBundleDisplayName</key><string>EzEyes</string>
